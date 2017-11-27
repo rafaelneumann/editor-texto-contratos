@@ -14,6 +14,10 @@
 				document.getElementById('return_area').value = '';
 				
 				let main_text = document.getElementById('copied_area').value;
+				
+				let re_extra_date = /Relatório Emitido em.*\n/g;
+				main_text = main_text.replace(re_extra_date, '');
+				
 				let groups = main_text.split('Lota');
 				
 				for (let i = 0; i < groups.length - 1; i++) {
