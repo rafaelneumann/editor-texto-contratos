@@ -17,8 +17,8 @@
 				
 				let re_extra_date = /Relatório Emitido em.*\n/g;
 				main_text = main_text.replace(re_extra_date, '');
-				main_text = main_text.replace('ã', 'a');
-				main_text = main_text.replace('ç', 'c');
+				main_text = main_text.replace(/ã/g, 'a');
+				main_text = main_text.replace(/ç/g, 'c');
 				
 				let groups = main_text.split('Lota');
 				
