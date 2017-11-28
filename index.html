@@ -27,13 +27,15 @@
 					let re_portaria = /Nr.:\s(\d*)/g;
 					let portaria = groups[i].match(re_portaria);
 					
-					console.log(portaria);
+					let txt_portaria = '';
 					
-					let portaria_txt = ' (Portaria ' + portaria[0].replace('Nr.: ', '') + ' de ' + datas[2] + ')';
-					
-					document.getElementById('return_area').value += "x. Vínculo: Tempo de Serviço Público Estadual - Professor\nÓrgão de lotação: Secretaria de Estado da Educação\nInício: " + datas[0] + portaria_txt + '\nFim: ' + datas[1] + portaria_txt + '\nRegime de Trabalho: Estatutário/Celetista\nRegime Previdenciário: RPPG/RGPS\n\n';
+					if (portaria === null) {
+						txt_portaria = ' (Sem portaria)';
+					} else {
+						txt_portaria = ' (Portaria ' + portaria[0].replace('Nr.: ', '') + ' de ' + datas[2] + ')';
+					}
+					document.getElementById('return_area').value += "x. Vínculo: Tempo de Serviço Público Estadual - Professor\nÓrgão de lotação: Secretaria de Estado da Educação\nInício: " + datas[0] + txt_portaria + '\nFim: ' + datas[1] + txt_portaria + '\nRegime de Trabalho: Estatutário/Celetista\nRegime Previdenciário: RPPG/RGPS\n\n';
 				}
-				
 			}
 		</script>
 	</head>
