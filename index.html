@@ -1,61 +1,55 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-		<title>Editar a lista de contratos</title>
-		<style>
-			body {
-				max-width: 1000px;
-				margin: auto;
-			}
-		</style>
-		<script>
-			function go() {
-				document.getElementById('return_area').value = '';
-				
-				let main_text = document.getElementById('copied_area').value;
-				
-				let re_extra_date = /Relatório Emitido em.*\n/g;
-				main_text = main_text.replace(re_extra_date, '');
-				main_text = main_text.replace(/ã/g, 'a');
-				main_text = main_text.replace(/ç/g, 'c');
-				
-				let groups = main_text.split('Lota');
-				
-				for (let i = 0; i < groups.length - 1; i++) {
-					let re_datas = /\w{3}:\s*\d{2}\/\d{2}\/\d{4}/g;
-					let datas = groups[i].match(re_datas);
-					let ini, fim, pub;
-										
-					for (let i = 0; i < datas.length; i++) {
-						if (datas[i].includes("cio: ")) {
-							ini = datas[i].substr(5);
-						} else if (datas[i].includes("Fim: ")) {
-							fim = datas[i].substr(5);
-						} else if (datas[i].includes("cao: ")) {
-							pub = datas[i].substr(5);
-						}
-					}
-					
-					let re_portaria = /Nr.:\s(\d*)/g;
-					let portaria = groups[i].match(re_portaria);
-					
-					let txt_portaria = '';
-					
-					if (portaria === null) {
-						txt_portaria = ' (Sem portaria)';
-					} else {
-						txt_portaria = ' (Portaria ' + portaria[0].replace('Nr.: ', '') + ' de ' + pub + ')';
-					}
-					document.getElementById('return_area').value += "x. Vínculo: TEMPO DE SERVIÇO PÚBLICO ESTADUAL - PROFESSOR\nÓrgão de lotação: SECRETARIA DE ESTADO DA EDUCAÇÃO\nInício: " + ini + txt_portaria + '\nFim: ' + fim + txt_portaria + '\nRegime de Trabalho: Estatutário/Celetista\nRegime Previdenciário: RPPS/RGPS\n\n';
-				}
-			}
-		</script>
-	</head>
-	<body>
-		<h2>Texto original:</h2>
-		<textarea rows="8" cols="100" onkeyup="go();" id="copied_area"></textarea>
-		<h2>Texto formatado:</h2>
-		<textarea rows="14" cols="100" id="return_area"></textarea>
-	</body>
-</html> 
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Editar a lista de contratos</title>
+    <style>
+        body {
+            max-width: 1000px;
+            margin: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Texto original:</h2>
+    <textarea rows="8" cols="100" onkeyup="go();" id="copied_area"></textarea>
+    <h2>Texto formatado:</h2>
+    <textarea rows="14" cols="100" id="return_area"></textarea>
+
+    <script>
+        function go() {
+            document.getElementById('return_area').value = '';
+
+            let main_text = document.getElementById('copied_area').value;
+
+            let re_extra_date = /Relatório Emitido em.*\n/g;
+            main_text = main_text.replace(re_extra_date, '');
+            main_text = main_text.replace(/ã/g, 'a');
+            main_text = main_text.replace(/ç/g, 'c');
+
+            let groups = main_text.split('Lota');
+
+            for (let i = 0; i < groups.length - 1; i++) {
+                let re_datas = /\w{3}:\s*\d{2}\/\d{2}\/\d{4}/g;
+                let datas = groups[i].match(re_datas);
+                let ini, fim, pub;
+
+                for (let i = 0; i < datas.length; i++) {
+                    if (datas[i].includes("cio: ")) {
+                        ini = datas[i].substr(5);
+                    } else if (datas[i].includes("Fim: ")) {
+                        fim = datas[i].substr(5);
+                    } else if (datas[i].includes("cao: ")) {
+                        pub = datas[i].substr(5);
+                    }
+                }
+
+                document.getElementById('return_area').value += "x. Vínculo: TEMPO DE SERVIÇO PÚBLICO ESTADUAL - PROFESSOR\nÓrgão de lotação: SECRETARIA DE ESTADO DA EDUCAÇÃO\nInício: " + ini + '\nFim: ' + fim + '\nRegime de Trabalho: Estatutário/Celetista\nRegime Previdenciário: RPPS/RGPS\n\n';
+            }
+        }
+    </script>
+</body>
+
+</html>
